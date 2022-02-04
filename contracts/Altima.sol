@@ -34,7 +34,7 @@ contract Altima is ERC721, Ownable, ReentrancyGuard {
 
     function earlyMint() public nonReentrant {
         require(mintIsActive, "Minting Altima is not available yet." );
-		require(supply.current() <= ALTIMA_FREE_COUNT, "invalid mint");
+		require(supply.current() < ALTIMA_FREE_COUNT, "invalid mint");
         _mintBoosterPack(msg.sender);
     }
 
