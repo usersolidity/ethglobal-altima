@@ -3,7 +3,7 @@ const hre = require("hardhat");
 async function main() {
   
   const altimaContract = await hre.ethers.getContractFactory("Altima");
-  const altima = await altimaContract.deploy("Hello, Hardhat!");
+  const altima = await altimaContract.deploy();
 
   await altima.deployed();
 
