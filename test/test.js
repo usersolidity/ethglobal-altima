@@ -4,7 +4,7 @@ const { ethers } = require("hardhat");
 describe("Altima", function () {
   it("Should return the new greeting once it's changed", async function () {
     const altimaContract = await ethers.getContractFactory("Altima");
-    const greeter = await altimaContract.deploy("Hello, world!");
+    const greeter = await altimaContract.deploy("Hello, world! deploying altima");
     await greeter.deployed();
 
     expect(await greeter.greet()).to.equal("Hello, world!");
