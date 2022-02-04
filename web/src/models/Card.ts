@@ -1,7 +1,13 @@
 import Cat from "../images/species/cat.png";
+import Fox from "../images/species/fox.png";
+import Lion from "../images/species/lion.png";
+import Ostrich from "../images/species/ostrich.png";
 
 export enum Species {
   CAT = "Cat",
+  FOX = "Fox",
+  LION = "Lion",
+  OSTRICH = "Ostrich",
 }
 
 export type ArrowChoices = [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean];
@@ -62,6 +68,15 @@ export default class Card {
   getSpeciesImageUrl() {
     if (this.species === Species.CAT) {
       return Cat;
+    }
+    if (this.species === Species.FOX) {
+      return Fox;
+    }
+    if (this.species === Species.LION) {
+      return Lion;
+    }
+    if (this.species === Species.OSTRICH) {
+      return Ostrich;
     }
     return `/images/${this.id}`
   }
