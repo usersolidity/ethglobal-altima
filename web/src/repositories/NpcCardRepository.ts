@@ -107,7 +107,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Yellow Necktie"
       }, {
         "trait_type": "Animal",
-        "value": "Tiger"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Red Skull Eyepatch"
@@ -147,7 +147,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Red Floater"
       }, {
         "trait_type": "Animal",
-        "value": "Mouse"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Pink Monocle"
@@ -187,7 +187,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Cyan Dog Tag"
       }, {
         "trait_type": "Animal",
-        "value": "Corgi"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Green Skull Eyepatch"
@@ -227,7 +227,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Blue Leather Gorget"
       }, {
         "trait_type": "Animal",
-        "value": "Rabbit"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Blue Skull Eyepatch"
@@ -264,7 +264,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Cyan Dog Tag"
       }, {
         "trait_type": "Animal",
-        "value": "Rabbit"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Pink Smart Glasses"
@@ -304,7 +304,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "YelloW Fur Collar"
       }, {
         "trait_type": "Animal",
-        "value": "Horse"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Violet Monocle"
@@ -341,7 +341,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Blue Ruff Collar"
       }, {
         "trait_type": "Animal",
-        "value": "Eagle"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Red Aviator Goggles"
@@ -381,7 +381,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Pink Fur Collar"
       }, {
         "trait_type": "Animal",
-        "value": "Rabbit"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Blue and Red Cateye Glasses"
@@ -421,7 +421,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Blue Bandana"
       }, {
         "trait_type": "Animal",
-        "value": "Dragon"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Blue and Red Cateye Glasses"
@@ -458,7 +458,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Red Headphones"
       }, {
         "trait_type": "Animal",
-        "value": "Monkey"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Blue and Red Cateye Glasses"
@@ -498,7 +498,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Green Bowtie"
       }, {
         "trait_type": "Animal",
-        "value": "Bull"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Brown Round Glasses"
@@ -535,7 +535,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Argentium Medallion Necklace"
       }, {
         "trait_type": "Animal",
-        "value": "Corgi"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Blue Round Glasses"
@@ -572,7 +572,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Red Bandana"
       }, {
         "trait_type": "Animal",
-        "value": "Eagle"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Green Aviator Goggles"
@@ -612,7 +612,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Blue Floater"
       }, {
         "trait_type": "Animal",
-        "value": "Horse"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Red and Green 3D Glasses"
@@ -652,7 +652,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Pink Floater"
       }, {
         "trait_type": "Animal",
-        "value": "Monkey"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Blue Visor"
@@ -692,7 +692,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Blue Chains"
       }, {
         "trait_type": "Animal",
-        "value": "Rabbit"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Orange Visor"
@@ -732,7 +732,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Green Bandana"
       }, {
         "trait_type": "Animal",
-        "value": "Mouse"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Brown Round Glasses"
@@ -772,7 +772,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Green Bandana"
       }, {
         "trait_type": "Animal",
-        "value": "Monkey"
+        "value": "Cat"
       }, {
         "trait_type": "Top Accessory",
         "value": "Blue Fez Hat"
@@ -806,7 +806,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Blue Headphones"
       }, {
         "trait_type": "Animal",
-        "value": "Rabbit"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Blue and Red Cateye Glasses"
@@ -846,7 +846,7 @@ export async function fetchCardsWithOffset(count: number, offset: number): Promi
         "value": "Red Chains"
       }, {
         "trait_type": "Animal",
-        "value": "Eagle"
+        "value": "Cat"
       }, {
         "trait_type": "Eye Accessory",
         "value": "Purple Shades"
