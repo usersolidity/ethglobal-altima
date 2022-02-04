@@ -23,6 +23,12 @@ const AppContainer = styled.div`
   height: 100vh;
   background: url(${Background}) no-repeat center center;
   background-size: cover;
+  
+  @media (max-width: 844px) {
+    flex-direction: column-reverse;
+    min-height: 100vh;
+    height: auto;
+  }
 `;
 
 const LogsSection = styled.section`

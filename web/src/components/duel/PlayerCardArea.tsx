@@ -18,7 +18,11 @@ const CardsScrollContainer = styled.div`
   }
 `;
 
-const CardsContainer = styled.div`
+interface CardsContainerProps {
+  length: number;
+}
+
+const CardsContainer = styled.div<CardsContainerProps>`
   flex: 0;
   width: 1280px;
   display: flex;
@@ -32,6 +36,15 @@ const CardsContainer = styled.div`
 
   @media (max-width: 844px) {
     width: 472px;
+    margin-left: ${props => {
+      if (props.length === 5) {
+        return 75;
+      }
+      if (props.length === 4) {
+        return 15;
+      }
+      return 0;
+    }}px;
   }
 `;
 
@@ -64,7 +77,7 @@ function PlayerCardArea({ cards }: IProps) {
 
   return (
     <CardsScrollContainer>
-      <CardsContainer>
+      <CardsContainer length={cards.length}>
         {cards.map((card, index) => (
           <CardRotate key={card.id} index={index} length={cards.length}>
             <CardComponent

@@ -24,6 +24,10 @@ const CardsContainer = styled.div`
   background: url(${CardHolderBackground}) no-repeat center center;
   background-size: contain;
   align-self: flex-end;
+
+  @media (max-width: 844px) {
+    width: 472px;
+  }
 `;
 
 interface CardRotateProps {
