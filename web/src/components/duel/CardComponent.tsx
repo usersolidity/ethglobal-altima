@@ -72,7 +72,7 @@ const CardContainer = styled.div<ICardContainerProps>`
   height: ${props => CARD_HEIGHT / (props.mini ? 2 : 1)}px;
   margin: 4px;
   transition: transform 0.5s;
-  animation: ${fadeInFromTop} 0.5s ease-in${props => props.shimmering && css`, ${shimmer} 1 s linear infinite`};
+  animation: ${fadeInFromTop} 0.5s ease-in${props => props.shimmering && css`, ${shimmer} 1s linear infinite`};
 
   @media (min-width: 844px) {
     width: ${CARD_WIDTH}px;
@@ -83,7 +83,7 @@ const CardContainer = styled.div<ICardContainerProps>`
     transform: rotateY(180deg);
   `}
   ${props => props.hovering && `
-    z-index: 2;
+    z-index: 1;
   `}
   ${props => props.clickable && `
     cursor: pointer;

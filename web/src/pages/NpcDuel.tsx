@@ -198,9 +198,9 @@ export default function NpcDuel() {
                           alt={log.message.battleDetails.defType}
                         />
                         <span>
-                        {log.message.battleDetails.def} def.
+                          {log.message.battleDetails.def} def.
                           {log.message.battleDetails.atk === log.message.battleDetails.def ? " Flipping coin..." : ""}
-                      </span>
+                        </span>
                       </>
                       <BattleAnimation battleDetails={log.message.battleDetails} />
                     </>
