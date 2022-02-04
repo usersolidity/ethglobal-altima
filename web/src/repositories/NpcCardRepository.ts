@@ -101,5 +101,5 @@ export async function fetchCardsOfProfile(
 }
 
 export async function fetchCardsWithOffset(count: number, offset: number): Promise<Array<Card>> {
-  return metadata.map(mapMetadataToCard).slice(offset, count)
+  return metadata.map(mapMetadataToCard).slice(offset, count + offset)
 }
