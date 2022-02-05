@@ -69,6 +69,8 @@ const CardRotate = styled.div<CardRotateProps>`
 
   :hover {
     z-index: 2;
+    transform: rotate(0deg);
+    margin-top: -120px;
   }
 `;
 
