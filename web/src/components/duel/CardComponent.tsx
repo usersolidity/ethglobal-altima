@@ -4,10 +4,14 @@ import Card from "../../models/Card";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/CardConstants";
 import SwordImage from "../../images/icons/sword.png";
 import StaffImage from "../../images/icons/staff.png";
+import GoldSwordImage from "../../images/icons/goldsword.png";
+import GoldStaffImage from "../../images/icons/goldstaff.png";
 import DualImage from "../../images/icons/dual.png";
 import UltiImage from "../../images/icons/ulti.png";
 import PhysicShieldImage from "../../images/icons/pshield.png";
 import MagicShieldImage from "../../images/icons/mshield.png";
+import GoldPhysicShieldImage from "../../images/icons/goldpshield.png";
+import GoldMagicShieldImage from "../../images/icons/goldmshield.png";
 import BlueCard from "../../images/cards/blue-card.jpeg";
 import OrangeCard from "../../images/cards/orange-card.jpeg";
 
@@ -362,10 +366,6 @@ const AtkDefIcon = styled.img<AtkDefIconProps>`
   width: 17px;
   height: 17px;
   margin: 0 1px 0 3px;
-
-  ${props => props.golden && css`
-    filter: hue-rotate(60deg);
-  `}
 `;
 
 interface AtkDefValueContainerProps {
@@ -406,6 +406,19 @@ const getAtkTypeImg = (atkType: string) => {
   }
 }
 
+const getGoldAtkTypeImg = (atkType: string) => {
+  switch (atkType) {
+    case "P":
+      return GoldSwordImage;
+    case "M":
+      return GoldStaffImage;
+    case "A":
+      return DualImage;
+    default:
+      return UltiImage;
+  }
+}
+
 export default function CardComponent(
   {
     card,
@@ -418,8 +431,9 @@ export default function CardComponent(
 ) {
   const [hovering, setHovering] = useState(false);
   const trueHovering = hovering || !!overrideHovering;
-
-  const atkTypeImage = getAtkTypeImg(card.atkType);
+  const atkTypeImage = (card.atk > 9) ? getGoldAtkTypeImg(card.atkType) : getAtkTypeImg(card.atkType);
+  const pShieldImage = (card.pdef > 9 ) ? GoldPhysicShieldImage : PhysicShieldImage
+  const mShieldImage = (card.mdef > 9 ) ? GoldMagicShieldImage : MagicShieldImage
 
   return (
     <CardContainer
@@ -436,9 +450,9 @@ export default function CardComponent(
         <CardNumbers flipped={belongsToPlayer!}>
           <AtkDefIcon src={atkTypeImage} alt={card.atkType} golden={card.atk > 9} />
           <AtkDefValue value={card.atk} />
-          <AtkDefIcon src={PhysicShieldImage} alt="P Def" golden={card.pdef > 9} />
+          <AtkDefIcon src={pShieldImage} alt="P Def" golden={card.pdef > 9} />
           <AtkDefValue value={card.pdef} />
-          <AtkDefIcon src={MagicShieldImage} alt="M Def" golden={card.mdef > 9} />
+          <AtkDefIcon src={mShieldImage} alt="M Def" golden={card.mdef > 9} />
           <AtkDefValue value={card.mdef} />
         </CardNumbers>
         <CardImage flipped={belongsToPlayer!} imageUrl={card.getSpeciesImageUrl()} />
