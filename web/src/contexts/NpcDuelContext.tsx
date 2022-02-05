@@ -160,9 +160,9 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
           ).reduce((a, b) => a + b, 0);
 
           const opponentScore = 10 - playerScore;
-          var playerWins = Number(localStorage.getItem('wins')) || 0;
-          var playerLosses = Number(localStorage.getItem('losses')) || 0;
-          var playerDraws = Number(localStorage.getItem('draws')) || 0;
+          let playerWins = Number(localStorage.getItem('wins')) || 0;
+          let playerLosses = Number(localStorage.getItem('losses')) || 0;
+          let playerDraws = Number(localStorage.getItem('draws')) || 0;
 
           if (playerScore === 10) {
             logsDispatch({ type: ADD_LOG, message: "GAME COMPLETE! PERFECT!" });
