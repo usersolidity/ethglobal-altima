@@ -19,7 +19,7 @@ contract Altima is ERC721, Ownable, ReentrancyGuard {
     uint256 public constant ALTIMA_MAX = 1000;
     uint256 public constant ALTIMA_FREE_COUNT = 100;
     uint256 public constant BOOSTER_PACK_QTY = 5;
-    uint256 public mintPrice = 0.1 ether;
+    uint256 public mintPrice = 0.01 ether;
 
 
     constructor() ERC721("Altima", "ALTIMA") {}

@@ -14,6 +14,7 @@ import AtkDefIcon from "../components/duel/AtkDefIcon";
 import Card from "../models/Card";
 import Background from "../images/altima-background.png";
 import CardHolderBackground from "../images/card-holder.png";
+import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 
 const AppContainer = styled.div`
   display: flex;
@@ -145,6 +146,8 @@ export default function NpcDuel() {
   const npcContext = useContext(NpcContext);
   const duelContext = useContext(NpcDuelContext);
   // const web3Context = useContext(Web3Context);
+  const { authenticate, isAuthenticated, isAuthenticating, user, Moralis } = useMoralis();
+  const web3Context = useWeb3ExecuteFunction();
 
   const initializeGame = () => {
     if (npcContext?.cards) {
@@ -175,6 +178,42 @@ export default function NpcDuel() {
       duelContext?.clearGame();
     }
   }
+
+  const ealyMintNFT = async () => {
+    let options = {
+       contractAddress: "",
+       functionName: "earlyMint",
+       abi:[],
+    }
+
+    await web3Context.fetch({
+      params: options,
+    });
+  }
+
+  const mintNFT = async () => {
+    let options = {
+       contractAddress: "",
+       functionName: "earlyMint",
+       abi:[],
+    },
+    msgValue: Moralis.Units.ETH(0.01); // TODO: not sure if this is correct
+
+    await web3Context.fetch({
+      params: options,
+    });
+  }
+
+
+  if (isAuthenticated) {
+    // return (
+    //   <RestartGameSection>
+    //     <button onClick={ealyMintNFT}>Mint</button>
+    //   </RestartGameSection>
+    // )
+    console.log(user?.get('ethAddress'));
+  }
+  
 
   useEffect(initializeGame, []);
   return (
@@ -225,7 +264,7 @@ export default function NpcDuel() {
         <DuelResultStat>Winner: {localStorage.getItem("wins") || 0}</DuelResultStat>
         <DuelResultStat>Losses: {localStorage.getItem("losses") || 0}</DuelResultStat>
         <DuelResultStat>Draws: {localStorage.getItem("draws") || 0}</DuelResultStat>
-        <button>Connect Wallet</button>
+        <button onClick={() => authenticate({ signingMessage: "Welcome to Altima"})}>Connect Wallet</button>
         <button onClick={initializeGame}>Restart Game</button>
       </RestartGameSection>
      
