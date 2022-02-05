@@ -52,6 +52,10 @@ const Web3Section = styled.section`
 `;
 
 
+const DuelResultStat = styled.div`
+  color: white;
+`;
+
 const DuelScene = styled.div`
   display: flex;
   flex-direction: column;
@@ -226,6 +230,9 @@ export default function NpcDuel() {
         <button>Connect Wallet</button>
       </Web3Section>
       <RestartGameSection>
+        <DuelResultStat>Winner: {localStorage.getItem("wins") || 0}</DuelResultStat>
+        <DuelResultStat>Losses: {localStorage.getItem("losses") || 0}</DuelResultStat>
+        <DuelResultStat>Draws: {localStorage.getItem("draws") || 0}</DuelResultStat>
         <button onClick={initializeGame}>Restart Game</button>
       </RestartGameSection>
     </AppContainer>

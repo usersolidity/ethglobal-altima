@@ -4,10 +4,14 @@ import Card from "../../models/Card";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/CardConstants";
 import SwordImage from "../../images/icons/sword.png";
 import StaffImage from "../../images/icons/staff.png";
+import GoldSwordImage from "../../images/icons/goldsword.png";
+import GoldStaffImage from "../../images/icons/goldstaff.png";
 import DualImage from "../../images/icons/dual.png";
 import UltiImage from "../../images/icons/ulti.png";
 import PhysicShieldImage from "../../images/icons/pshield.png";
 import MagicShieldImage from "../../images/icons/mshield.png";
+import GoldPhysicShieldImage from "../../images/icons/goldpshield.png";
+import GoldMagicShieldImage from "../../images/icons/goldmshield.png";
 import BlueCard from "../../images/cards/blue-card.jpeg";
 import OrangeCard from "../../images/cards/orange-card.jpeg";
 
@@ -21,7 +25,8 @@ interface IProps {
 }
 
 const ARROW_OUTLINE_COLOR = "#111";
-const ARROW_COLOR = "#eee";
+const OUTLINE_COLOR = "#eee";
+const ARROW_COLOR = "gold";
 
 interface ICardContainerProps {
   readonly flipped: boolean;
@@ -99,7 +104,7 @@ const CardOutline = styled.div<ICardOutlineProps>`
   flex-direction: column;
   flex: 1;
   padding: 16px 0;
-  border: 2px solid ${ARROW_COLOR};
+  border: 2px solid ${OUTLINE_COLOR};
   transition: background-image 0.5s;
 
   background-image: url("${props => props.belongsToPlayer ? BlueCard : OrangeCard}");
@@ -115,7 +120,7 @@ interface ICardIdProps {
 const CardId = styled.div<ICardIdProps>`
   flex: 0;
   text-align: center;
-  color: ${ARROW_COLOR};
+  color: ${OUTLINE_COLOR};
   font-size: 10px;
   font-weight: bold;
   transition: transform 0.5s;
@@ -152,7 +157,7 @@ const CardNumbers = styled.div<ICardNumbersProps>`
   flex: 0;
   display: flex;
   text-align: center;
-  color: ${ARROW_COLOR};
+  color: ${OUTLINE_COLOR};
   font-weight: bold;
   font-size: 14px;
   transition: transform 0.5s;
@@ -362,10 +367,6 @@ const AtkDefIcon = styled.img<AtkDefIconProps>`
   width: 17px;
   height: 17px;
   margin: 0 1px 0 3px;
-
-  ${props => props.golden && css`
-    filter: hue-rotate(60deg);
-  `}
 `;
 
 interface AtkDefValueContainerProps {
@@ -406,6 +407,19 @@ const getAtkTypeImg = (atkType: string) => {
   }
 }
 
+const getGoldAtkTypeImg = (atkType: string) => {
+  switch (atkType) {
+    case "P":
+      return GoldSwordImage;
+    case "M":
+      return GoldStaffImage;
+    case "A":
+      return DualImage;
+    default:
+      return UltiImage;
+  }
+}
+
 export default function CardComponent(
   {
     card,
@@ -418,8 +432,9 @@ export default function CardComponent(
 ) {
   const [hovering, setHovering] = useState(false);
   const trueHovering = hovering || !!overrideHovering;
-
-  const atkTypeImage = getAtkTypeImg(card.atkType);
+  const atkTypeImage = (card.atk > 9) ? getGoldAtkTypeImg(card.atkType) : getAtkTypeImg(card.atkType);
+  const pShieldImage = (card.pdef > 9 ) ? GoldPhysicShieldImage : PhysicShieldImage
+  const mShieldImage = (card.mdef > 9 ) ? GoldMagicShieldImage : MagicShieldImage
 
   return (
     <CardContainer
@@ -436,9 +451,9 @@ export default function CardComponent(
         <CardNumbers flipped={belongsToPlayer!}>
           <AtkDefIcon src={atkTypeImage} alt={card.atkType} golden={card.atk > 9} />
           <AtkDefValue value={card.atk} />
-          <AtkDefIcon src={PhysicShieldImage} alt="P Def" golden={card.pdef > 9} />
+          <AtkDefIcon src={pShieldImage} alt="P Def" golden={card.pdef > 9} />
           <AtkDefValue value={card.pdef} />
-          <AtkDefIcon src={MagicShieldImage} alt="M Def" golden={card.mdef > 9} />
+          <AtkDefIcon src={mShieldImage} alt="M Def" golden={card.mdef > 9} />
           <AtkDefValue value={card.mdef} />
         </CardNumbers>
         <CardImage flipped={belongsToPlayer!} imageUrl={card.getSpeciesImageUrl()} />

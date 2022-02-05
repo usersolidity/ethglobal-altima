@@ -250,7 +250,6 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
       voidTileIds,
       npcCards!,
       tileIndex,
-      enemyCounters
     );
     delayedEventsDispatch({ type: ADD_EVENTS, gameEvents: eventResults })
 
