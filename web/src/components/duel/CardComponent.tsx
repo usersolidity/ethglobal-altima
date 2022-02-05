@@ -25,7 +25,8 @@ interface IProps {
 }
 
 const ARROW_OUTLINE_COLOR = "#111";
-const ARROW_COLOR = "#eee";
+const OUTLINE_COLOR = "#eee";
+const ARROW_COLOR = "gold";
 
 interface ICardContainerProps {
   readonly flipped: boolean;
@@ -103,7 +104,7 @@ const CardOutline = styled.div<ICardOutlineProps>`
   flex-direction: column;
   flex: 1;
   padding: 16px 0;
-  border: 2px solid ${ARROW_COLOR};
+  border: 2px solid ${OUTLINE_COLOR};
   transition: background-image 0.5s;
 
   background-image: url("${props => props.belongsToPlayer ? BlueCard : OrangeCard}");
@@ -119,7 +120,7 @@ interface ICardIdProps {
 const CardId = styled.div<ICardIdProps>`
   flex: 0;
   text-align: center;
-  color: ${ARROW_COLOR};
+  color: ${OUTLINE_COLOR};
   font-size: 10px;
   font-weight: bold;
   transition: transform 0.5s;
@@ -156,7 +157,7 @@ const CardNumbers = styled.div<ICardNumbersProps>`
   flex: 0;
   display: flex;
   text-align: center;
-  color: ${ARROW_COLOR};
+  color: ${OUTLINE_COLOR};
   font-weight: bold;
   font-size: 14px;
   transition: transform 0.5s;
