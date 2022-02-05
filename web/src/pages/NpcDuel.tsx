@@ -15,6 +15,7 @@ import Card from "../models/Card";
 import Background from "../images/altima-background.png";
 import CardHolderBackground from "../images/card-holder.png";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../constants/ContractConstants";
 
 const AppContainer = styled.div`
   display: flex;
@@ -145,9 +146,10 @@ function shuffle<T>(array: Array<T>): Array<T> {
 export default function NpcDuel() {
   const npcContext = useContext(NpcContext);
   const duelContext = useContext(NpcDuelContext);
-  // const web3Context = useContext(Web3Context);
-  const { authenticate, isAuthenticated, isAuthenticating, user, Moralis } = useMoralis();
-  const web3Context = useWeb3ExecuteFunction();
+  const { authenticate, isAuthenticated, isAuthenticating, Moralis } = useMoralis();
+  const web3 = useWeb3ExecuteFunction();
+  const [totalSupply, setTotalSupply] = React.useState<number | null>(null);
+  const [freeMintCount, setFreeMintCount] = React.useState<number | null>(null);
 
   const initializeGame = () => {
     if (npcContext?.cards) {
@@ -181,41 +183,44 @@ export default function NpcDuel() {
 
   const ealyMintNFT = async () => {
     let options = {
-       contractAddress: "",
+       contractAddress: CONTRACT_ADDRESS,
        functionName: "earlyMint",
-       abi:[],
+       abi: CONTRACT_ABI,
     }
-
-    await web3Context.fetch({
+    await web3.fetch({
       params: options,
     });
   }
 
-  const mintNFT = async () => {
-    let options = {
-       contractAddress: "",
-       functionName: "earlyMint",
-       abi:[],
-    },
-    msgValue: Moralis.Units.ETH(0.01); // TODO: not sure if this is correct
+  // const mintNFT = async () => {
+  //   let options = {
+  //      contractAddress: "",
+  //      functionName: "earlyMint",
+  //      abi:[],
+  //   },
+  //   msgValue: Moralis.Units.ETH(0.01), // Todo: not sure if this is correct
 
-    await web3Context.fetch({
-      params: options,
-    });
-  }
+  //   await web3Context.fetch({
+  //     params: options,
+  //   });
+  // }
 
-
-  if (isAuthenticated) {
-    // return (
-    //   <RestartGameSection>
-    //     <button onClick={ealyMintNFT}>Mint</button>
-    //   </RestartGameSection>
-    // )
-    console.log(user?.get('ethAddress'));
-  }
-  
 
   useEffect(initializeGame, []);
+  useEffect(() => {
+    (async () => {
+      await Moralis.enableWeb3();
+      let options = {
+         contractAddress: CONTRACT_ADDRESS,
+         functionName: "totalSupply",
+         abi: CONTRACT_ABI,
+      }
+      setTotalSupply(+(await Moralis.executeFunction(options)))
+      options.functionName = 'ALTIMA_FREE_COUNT';
+      setFreeMintCount(+(await Moralis.executeFunction(options)))
+    })();
+    
+  }, []);
   return (
     <AppContainer>
       <LogsSection>
@@ -264,7 +269,15 @@ export default function NpcDuel() {
         <DuelResultStat>Winner: {localStorage.getItem("wins") || 0}</DuelResultStat>
         <DuelResultStat>Losses: {localStorage.getItem("losses") || 0}</DuelResultStat>
         <DuelResultStat>Draws: {localStorage.getItem("draws") || 0}</DuelResultStat>
-        <button onClick={() => authenticate({ signingMessage: "Welcome to Altima"})}>Connect Wallet</button>
+        {isAuthenticated ? (
+          <button onClick={ealyMintNFT}>Mint ({totalSupply} / {freeMintCount})</button>
+        ) : (
+          isAuthenticating ? (
+            <button>Authenticating...</button>
+          ) : (
+            <button onClick={() => authenticate({ signingMessage: "Welcome to Altima"})}>Connect Wallet</button>
+          )
+        )}
         <button onClick={initializeGame}>Restart Game</button>
       </RestartGameSection>
      
