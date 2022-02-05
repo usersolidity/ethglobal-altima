@@ -11,3 +11,9 @@ export default function ActivityIndicator() {
     <Container>Loading...</Container>
   )
 }
+
+// export default function Web3Button({ label, handleClick }) {
+//   return (
+//     <button onClick={handleClick}>{label}</button>
+//   )
+// }
