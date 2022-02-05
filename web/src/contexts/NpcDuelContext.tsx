@@ -172,13 +172,13 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
             localStorage.setItem("draws", String(playerDraws++));
           } else if (playerScore === 0) {
             logsDispatch({ type: ADD_LOG, message: "GAME COMPLETE! YOU PERFECTLY LOST!!" });
-            localStorage.setItem("losses", String(+playerLosses++));
+            localStorage.setItem("losses", String(playerLosses++));
           } else if (playerScore < 5) {
             logsDispatch({ type: ADD_LOG, message: `GAME COMPLETE! YOU LOSE! ${playerScore} - ${opponentScore}` });
-            localStorage.setItem("losses", String(+playerLosses++));
+            localStorage.setItem("losses", String(playerLosses++));
           } else {
             logsDispatch({ type: ADD_LOG, message: `GAME COMPLETE! YOU WIN! ${playerScore} - ${opponentScore}` });
-            localStorage.setItem("wins", String(+playerWins++));
+            localStorage.setItem("wins", String(playerWins++));
           }
         }
         return;
