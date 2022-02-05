@@ -47,6 +47,11 @@ const RestartGameSection = styled.section`
   flex: 1;
 `;
 
+const Web3Section = styled.section`
+  padding-right: 5px;
+`;
+
+
 const DuelScene = styled.div`
   display: flex;
   flex-direction: column;
@@ -217,6 +222,9 @@ export default function NpcDuel() {
           </DuelScene>
         )}
       </BattlefieldSection>
+      <Web3Section>
+        <button>Connect Wallet</button>
+      </Web3Section>
       <RestartGameSection>
         <button onClick={initializeGame}>Restart Game</button>
       </RestartGameSection>
