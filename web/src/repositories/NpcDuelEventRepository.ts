@@ -314,7 +314,7 @@ const enemyPlay = (
     tileSet: cloneTileCards(simulatedTileCards),
     gameState: EVENTS_PLAYING,
     npcCards: newNpcCards,
-    logs: [],
+    logs: [new GameLog("", EventType.CARD_FLIP)],
     remarks: "408"
   });
 
@@ -595,14 +595,6 @@ export async function simulateEventResultsAfterChoosingEnemyCounter(
 
   if (battleResult < 0) {
     simulatedTileCards = flipAllEncounters(atkCard, attackingTileIndex, simulatedTileCards, voidTileIds, false, gameEvents);
-    gameEvents.push({
-      tileSet: simulatedTileCards,
-      gameState: EVENTS_PLAYING,
-      logs: [],
-      remarks: "555",
-      enemyCounterIds: [],
-      attackingTileId: null,
-    });
     enemyPlay(simulatedTileCards, voidTileIds, npcCards, gameEvents);
     return gameEvents;
   }
@@ -635,14 +627,6 @@ export async function simulateEventResultsAfterChoosingEnemyCounter(
   } else {
     simulatedTileCards = flipAllEncounters(atkCard, attackingTileIndex, simulatedTileCards, voidTileIds, true, gameEvents);
   }
-  gameEvents.push({
-    tileSet: simulatedTileCards,
-    gameState: EVENTS_PLAYING,
-    logs: [],
-    remarks: "598",
-    enemyCounterIds: [],
-    attackingTileId: null,
-  });
   enemyPlay(simulatedTileCards, voidTileIds, npcCards, gameEvents);
 
   return gameEvents;

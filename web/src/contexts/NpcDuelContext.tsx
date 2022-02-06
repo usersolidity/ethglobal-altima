@@ -229,35 +229,27 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
         setNpcCards(delayedEvent.npcCards);
       }
 
-      // TODO: Add sound effects
       delayedEvent.logs.forEach(gameLog => {
         if (gameLog.eventType === EventType.CARD_FLIP) {
           cardFlipSound();
-          console.log("Playing card flip sound...");
         }
         if (gameLog.eventType === EventType.CARD_PLAY) {
           cardPlaySound();
-          console.log("Playing card play sound...");
         }
         if (gameLog.eventType === EventType.COIN_FLIP) {
           coinFlipSound();
-          console.log("Playing coin flip sound...");
         }
         if (gameLog.eventType === EventType.SWORD_ATK) {
           swordAttackSound();
-          console.log("Playing sword atk sound...");
         }
         if (gameLog.eventType === EventType.SWORD_DEF) {
           swordDefenseSound();
-          console.log("Playing sword def sound...");
         }
         if (gameLog.eventType === EventType.MAGIC_ATK) {
           magicAttackSound();
-          console.log("Playing magic atk sound...");
         }
         if (gameLog.eventType === EventType.MAGIC_DEF) {
           magicDefenseSound();
-          console.log("Playing magic def sound...");
         }
       });
 
@@ -301,6 +293,8 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
     ) as TileSet
     setTileCards(cloneTileCards(simulatedTileCards));
     setChosenPlayerCardIndex(null);
+
+    cardFlipSound();
 
     setStatus(EVENTS_PLAYING);
 
