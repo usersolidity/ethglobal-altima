@@ -14,6 +14,8 @@ import GoldPhysicShieldImage from "../../images/icons/goldpshield.png";
 import GoldMagicShieldImage from "../../images/icons/goldmshield.png";
 import BlueCard from "../../images/cards/blue-card.jpeg";
 import OrangeCard from "../../images/cards/orange-card.jpeg";
+import useSound from "use-sound";
+const CardClickFX = require("../../audio/card/card-click.mp3")
 
 interface IProps {
   card: Card;
@@ -77,8 +79,7 @@ const CardContainer = styled.div<ICardContainerProps>`
   height: ${props => CARD_HEIGHT / (props.mini ? 2 : 1)}px;
   margin: 4px;
   transition: transform 0.5s;
-  animation: ${fadeInFromTop} 0.5s ease-in${props => props.shimmering && css`, ${shimmer} 1s linear infinite`};
-
+  animation: ${fadeInFromTop} 0.5s ease-in${props => props.shimmering && css`, ${shimmer} 1s linear infinite`};  
   @media (min-width: 844px) {
     width: ${CARD_WIDTH}px;
     height: ${CARD_HEIGHT}px;
@@ -143,9 +144,8 @@ const CardImage = styled.div<ICardImageProps>`
   background-position: center;
   width: 100%;
   transition: transform 0.5s;
-
   ${props => props.flipped && `
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
   `}
 `;
 
@@ -435,6 +435,7 @@ export default function CardComponent(
   const atkTypeImage = (card.atk > 9) ? getGoldAtkTypeImg(card.atkType) : getAtkTypeImg(card.atkType);
   const pShieldImage = (card.pdef > 9 ) ? GoldPhysicShieldImage : PhysicShieldImage
   const mShieldImage = (card.mdef > 9 ) ? GoldMagicShieldImage : MagicShieldImage
+  const [cardClickSound] = useSound(CardClickFX)
 
   return (
     <CardContainer
@@ -443,7 +444,7 @@ export default function CardComponent(
       shimmering={shimmering}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      onClick={() => handleClick && handleClick()}
+      onClick={() => {handleClick && handleClick(); cardClickSound()}}
       clickable={!!handleClick}
       mini={false}
     >

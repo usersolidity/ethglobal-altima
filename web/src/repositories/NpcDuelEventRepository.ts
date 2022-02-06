@@ -196,14 +196,14 @@ function createNpcMove(
 }
 
 function getAtkEventType(atkType: string) {
-  if (atkType === "S") {
+  if (atkType === "P") {
     return EventType.SWORD_ATK;
   }
   return EventType.MAGIC_ATK;
 }
 
 function getDefEventType(defType: string) {
-  if (defType === "S") {
+  if (defType === "P") {
     return EventType.SWORD_DEF;
   }
   return EventType.MAGIC_DEF;
@@ -393,7 +393,7 @@ const startBattle = (
       new GameLog(
         `${atkCard.atk} atk vs ${counterDef.def} def.${shouldFlipCoin ? " Flipping coin..." : ""}`,
         shouldFlipCoin
-          ? EventType.CARD_FLIP
+          ? EventType.COIN_FLIP
           : atkCard.atk < counterDef.def
             ? getDefEventType(counterDef.defType)
             : getAtkEventType(atkCard.atkType),

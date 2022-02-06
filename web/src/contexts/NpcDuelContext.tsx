@@ -18,6 +18,14 @@ import {
 import GameLog from "../models/GameLog";
 import DuelResult from "../models/DuelResult";
 import EventType from "../models/EventType";
+import useSound from "use-sound";
+const CardPlayFX = require("../audio/card/card-play.mp3")
+const CardFlipFX = require("../audio/card/card-flip.mp3")
+const CoinFlipFX = require("../audio/coin-flip.mp3")
+const SwordAttackFX = require("../audio/attack/sword-attack.mp3")
+const SwordDefenseFX = require("../audio/defense/sword-defense.mp3")
+const MagicAttackFX = require("../audio/attack/magic-attack.mp3")
+const MagicDefenseFX = require("../audio/defense/magic-defense.mp3")
 
 export type CardSet = Array<GameCard>;
 
@@ -153,6 +161,13 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
   const [enemyGoesFirst, setEnemyGoesFirst] = useState<boolean>(false);
   const [logs, logsDispatch] = useReducer(logsReducer, []);
   const [delayedEvents, delayedEventsDispatch] = useReducer(delayedEventsReducer, []);
+  const [cardPlaySound] = useSound(CardPlayFX)
+  const [cardFlipSound] = useSound(CardFlipFX)
+  const [swordAttackSound] = useSound(SwordAttackFX)
+  const [swordDefenseSound] = useSound(SwordDefenseFX)
+  const [magicAttackSound] = useSound(MagicAttackFX)
+  const [magicDefenseSound] = useSound(MagicDefenseFX)
+  const [coinFlipSound] = useSound(CoinFlipFX)
 
   console.log("STATUS", status);
 
@@ -217,15 +232,31 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
       // TODO: Add sound effects
       delayedEvent.logs.forEach(gameLog => {
         if (gameLog.eventType === EventType.CARD_FLIP) {
-          // TODO: Play card flip sound
+          cardFlipSound();
           console.log("Playing card flip sound...");
         }
+        if (gameLog.eventType === EventType.CARD_PLAY) {
+          cardPlaySound();
+          console.log("Playing card play sound...");
+        }
+        if (gameLog.eventType === EventType.COIN_FLIP) {
+          coinFlipSound();
+          console.log("Playing coin flip sound...");
+        }
         if (gameLog.eventType === EventType.SWORD_ATK) {
-          // TODO: Play sword atk sound
+          swordAttackSound();
           console.log("Playing sword atk sound...");
         }
+        if (gameLog.eventType === EventType.SWORD_DEF) {
+          swordDefenseSound();
+          console.log("Playing sword def sound...");
+        }
+        if (gameLog.eventType === EventType.MAGIC_ATK) {
+          magicAttackSound();
+          console.log("Playing magic atk sound...");
+        }
         if (gameLog.eventType === EventType.MAGIC_DEF) {
-          // TODO: Play magic def sound
+          magicDefenseSound();
           console.log("Playing magic def sound...");
         }
       });
