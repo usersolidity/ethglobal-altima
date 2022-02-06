@@ -17,6 +17,7 @@ import {
 } from "../repositories/NpcDuelEventRepository";
 import GameLog from "../models/GameLog";
 import DuelResult from "../models/DuelResult";
+import EventType from "../models/EventType";
 
 export type CardSet = Array<GameCard>;
 
@@ -71,9 +72,15 @@ type LogAction = {
 function logsReducer(state: Array<DuelLog>, action: LogAction) {
   switch (action.type) {
     case ADD_LOG:
-      return [...state, new DuelLog(state.length, new GameLog(action.message, true))];
+      return [
+        ...state,
+        new DuelLog(state.length, new GameLog(action.message, EventType.UNNAMED, true))
+      ];
     case ADD_LOGS:
-      return [...state, ...action.messages.map((message, i) => new DuelLog(state.length + i, message))];
+      return [
+        ...state,
+        ...action.messages.map((message, i) => new DuelLog(state.length + i, message))
+      ];
     case CLEAR_LOGS:
       return [];
     default:
@@ -206,6 +213,22 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
       if (delayedEvent.npcCards) {
         setNpcCards(delayedEvent.npcCards);
       }
+
+      // TODO: Add sound effects
+      delayedEvent.logs.forEach(gameLog => {
+        if (gameLog.eventType === EventType.CARD_FLIP) {
+          // TODO: Play card flip sound
+          console.log("Playing card flip sound...");
+        }
+        if (gameLog.eventType === EventType.SWORD_ATK) {
+          // TODO: Play sword atk sound
+          console.log("Playing sword atk sound...");
+        }
+        if (gameLog.eventType === EventType.MAGIC_DEF) {
+          // TODO: Play magic def sound
+          console.log("Playing magic def sound...");
+        }
+      });
 
       setEnemyCounters(delayedEvent.enemyCounterIds || []);
 
