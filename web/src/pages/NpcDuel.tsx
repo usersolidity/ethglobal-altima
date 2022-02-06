@@ -324,9 +324,11 @@ export default function NpcDuel() {
       </BattlefieldSection>
       <RestartGameSection>
         <BlueButton onClick={initializeGame}>Restart Game</BlueButton>
+        <DuelResultStat>Perfect Wins: {localStorage.getItem("perfect-wins") || 0}</DuelResultStat>
         <DuelResultStat>Wins: {localStorage.getItem("wins") || 0}</DuelResultStat>
-        <DuelResultStat>Losses: {localStorage.getItem("losses") || 0}</DuelResultStat>
         <DuelResultStat>Draws: {localStorage.getItem("draws") || 0}</DuelResultStat>
+        <DuelResultStat>Losses: {localStorage.getItem("losses") || 0}</DuelResultStat>
+        <DuelResultStat>Perfect Losses: {localStorage.getItem("perfect-losses") || 0}</DuelResultStat>
       </RestartGameSection>
 
     </AppContainer>

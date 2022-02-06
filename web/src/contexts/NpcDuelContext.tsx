@@ -160,19 +160,21 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
           ).reduce((a, b) => a + b, 0);
 
           const opponentScore = 10 - playerScore;
+          let playerPerfectWins = Number(localStorage.getItem('perfect-wins')) || 0;
           let playerWins = Number(localStorage.getItem('wins')) || 0;
+          let playerPerfectLosses = Number(localStorage.getItem('perfect-losses')) || 0;
           let playerLosses = Number(localStorage.getItem('losses')) || 0;
           let playerDraws = Number(localStorage.getItem('draws')) || 0;
 
           if (playerScore === 10) {
             logsDispatch({ type: ADD_LOG, message: "GAME COMPLETE! PERFECT!" });
-            localStorage.setItem("wins", String(++playerWins));
+            localStorage.setItem("perfect-wins", String(++playerPerfectWins));
           } else if (playerScore === 5) {
             logsDispatch({ type: ADD_LOG, message: "GAME COMPLETE! DRAW!" });
             localStorage.setItem("draws", String(++playerDraws));
           } else if (playerScore === 0) {
             logsDispatch({ type: ADD_LOG, message: "GAME COMPLETE! YOU PERFECTLY LOST!!" });
-            localStorage.setItem("losses", String(++playerLosses));
+            localStorage.setItem("perfect-losses", String(++playerPerfectLosses));
           } else if (playerScore < 5) {
             logsDispatch({ type: ADD_LOG, message: `GAME COMPLETE! YOU LOSE! ${playerScore} - ${opponentScore}` });
             localStorage.setItem("losses", String(++playerLosses));
@@ -183,10 +185,6 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
         }
         return;
       }
-
-      const wins = localStorage.getItem('wins');
-      const losses = localStorage.getItem('losses');
-      const draws = localStorage.getItem('draws');
 
       if (status !== EVENTS_PLAYING) return;
 
