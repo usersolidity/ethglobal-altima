@@ -274,7 +274,7 @@ const flipAllEncounters = (
       logs: [
         new GameLog(
           `${atkCard.getFullName()} combo'd ${simulatedTileCards[enemyFlipId]!.getFullName()}!`,
-          EventType.CARD_FLIP,
+          EventType.COMBO,
         )
       ],
       remarks: "360"

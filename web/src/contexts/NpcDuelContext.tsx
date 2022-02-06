@@ -19,13 +19,14 @@ import GameLog from "../models/GameLog";
 import DuelResult from "../models/DuelResult";
 import EventType from "../models/EventType";
 import useSound from "use-sound";
-const CardPlayFX = require("../audio/card/card-play.mp3")
-const CardFlipFX = require("../audio/card/card-flip.mp3")
-const CoinFlipFX = require("../audio/coin-flip.mp3")
-const SwordAttackFX = require("../audio/attack/sword-attack.mp3")
-const SwordDefenseFX = require("../audio/defense/sword-defense.mp3")
-const MagicAttackFX = require("../audio/attack/magic-attack.mp3")
-const MagicDefenseFX = require("../audio/defense/magic-defense.mp3")
+import CardPlayFX from "../audio/card/card-play.mp3"
+import CardFlipFX from "../audio/card/card-flip.mp3"
+import CoinFlipFX from "../audio/coin-flip.mp3"
+import SwordAttackFX from "../audio/attack/sword-attack.mp3"
+import SwordDefenseFX from "../audio/defense/sword-defense.mp3"
+import MagicAttackFX from "../audio/attack/magic-attack.mp3"
+import MagicDefenseFX from "../audio/defense/magic-defense.mp3"
+import ComboFX from "../audio/combo.mp3"
 
 export type CardSet = Array<GameCard>;
 
@@ -168,6 +169,7 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
   const [magicAttackSound] = useSound(MagicAttackFX)
   const [magicDefenseSound] = useSound(MagicDefenseFX)
   const [coinFlipSound] = useSound(CoinFlipFX)
+  const [comboSound] = useSound(ComboFX)
 
   console.log("STATUS", status);
 
@@ -232,6 +234,9 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
       delayedEvent.logs.forEach(gameLog => {
         if (gameLog.eventType === EventType.CARD_FLIP) {
           cardFlipSound();
+        }
+        if (gameLog.eventType === EventType.COMBO) {
+          comboSound();
         }
         if (gameLog.eventType === EventType.CARD_PLAY) {
           cardPlaySound();

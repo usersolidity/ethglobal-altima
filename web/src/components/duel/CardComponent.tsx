@@ -15,7 +15,8 @@ import GoldMagicShieldImage from "../../images/icons/goldmshield.png";
 import BlueCard from "../../images/cards/blue-card.jpeg";
 import OrangeCard from "../../images/cards/orange-card.jpeg";
 import useSound from "use-sound";
-const CardClickFX = require("../../audio/card/card-click.mp3")
+// const CardClickFX = require("../../audio/card/card-click.mp3")
+import CardClickFX from "../../audio/card/card-click.mp3";
 
 interface IProps {
   card: Card;
