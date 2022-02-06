@@ -39,8 +39,9 @@ const LogsSection = styled.section`
   color: white;
   align-self: flex-start;
   align-items: flex-end;
-  margin-top: 24px;
-  margin-left: 24px;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-bottom: 24px;
   text-align: left;
 `;
 
