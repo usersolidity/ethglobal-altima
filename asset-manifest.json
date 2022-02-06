@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.ea74e5c0.css",
-    "main.js": "/static/js/main.4c575240.js",
-    "static/js/787.d1d4a2c2.chunk.js": "/static/js/787.d1d4a2c2.chunk.js",
-    "static/media/altima-background.png": "/static/media/altima-background.bbdb684a81ddf217ccd5.png",
-    "static/media/fox.png": "/static/media/fox.6cb5169edb2dea3d281f.png",
-    "static/media/lion.png": "/static/media/lion.3193d0472f11fe6c9209.png",
-    "static/media/cat.png": "/static/media/cat.40a9ae725ce21ed2a162.png",
-    "static/media/card-holder.png": "/static/media/card-holder.231d01c72f1e65fefec8.png",
-    "static/media/ostrich.png": "/static/media/ostrich.538f98b04536d6d36eb0.png",
-    "static/media/orange-card.jpeg": "/static/media/orange-card.7eea5bf84cccd1bc5953.jpeg",
-    "static/media/blue-card.jpeg": "/static/media/blue-card.1384c6baf968a8e4171e.jpeg",
-    "index.html": "/index.html",
-    "main.ea74e5c0.css.map": "/static/css/main.ea74e5c0.css.map",
-    "main.4c575240.js.map": "/static/js/main.4c575240.js.map",
-    "787.d1d4a2c2.chunk.js.map": "/static/js/787.d1d4a2c2.chunk.js.map"
+    "main.css": "https://clrke.github.io/ethglobal-altima/static/css/main.ea74e5c0.css",
+    "main.js": "https://clrke.github.io/ethglobal-altima/static/js/main.e666bc19.js",
+    "static/js/787.d1d4a2c2.chunk.js": "https://clrke.github.io/ethglobal-altima/static/js/787.d1d4a2c2.chunk.js",
+    "static/media/altima-background.png": "https://clrke.github.io/ethglobal-altima/static/media/altima-background.bbdb684a81ddf217ccd5.png",
+    "static/media/fox.png": "https://clrke.github.io/ethglobal-altima/static/media/fox.6cb5169edb2dea3d281f.png",
+    "static/media/lion.png": "https://clrke.github.io/ethglobal-altima/static/media/lion.3193d0472f11fe6c9209.png",
+    "static/media/cat.png": "https://clrke.github.io/ethglobal-altima/static/media/cat.40a9ae725ce21ed2a162.png",
+    "static/media/card-holder.png": "https://clrke.github.io/ethglobal-altima/static/media/card-holder.231d01c72f1e65fefec8.png",
+    "static/media/ostrich.png": "https://clrke.github.io/ethglobal-altima/static/media/ostrich.538f98b04536d6d36eb0.png",
+    "static/media/orange-card.jpeg": "https://clrke.github.io/ethglobal-altima/static/media/orange-card.7eea5bf84cccd1bc5953.jpeg",
+    "static/media/blue-card.jpeg": "https://clrke.github.io/ethglobal-altima/static/media/blue-card.1384c6baf968a8e4171e.jpeg",
+    "index.html": "https://clrke.github.io/ethglobal-altima/index.html",
+    "main.ea74e5c0.css.map": "https://clrke.github.io/ethglobal-altima/static/css/main.ea74e5c0.css.map",
+    "main.e666bc19.js.map": "https://clrke.github.io/ethglobal-altima/static/js/main.e666bc19.js.map",
+    "787.d1d4a2c2.chunk.js.map": "https://clrke.github.io/ethglobal-altima/static/js/787.d1d4a2c2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea74e5c0.css",
-    "static/js/main.4c575240.js"
+    "static/js/main.e666bc19.js"
   ]
 }
