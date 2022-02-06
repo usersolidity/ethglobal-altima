@@ -4,6 +4,7 @@ import GameCard from "../models/GameCard";
 import { ArrowChoices } from "../models/Card";
 import GameLog from "../models/GameLog";
 import BattleDetails from "../models/BattleDetails";
+import EventType from "../models/EventType";
 
 class NpcMove {
   npcCardIndex: number;
@@ -55,18 +56,18 @@ const getTargetY = (arrowIndex: number): number => {
 
 const getCounterDef = (atkType: string, pdef: number, mdef: number) => {
   if (atkType === "P") {
-    return {defType: "P", def: pdef};
+    return { defType: "P", def: pdef };
   }
   if (atkType === "M") {
-    return {defType: "M", def: mdef};
+    return { defType: "M", def: mdef };
   }
   if (atkType === "X") {
     if (pdef > mdef) {
-      return {defType: "P", def: pdef};
+      return { defType: "P", def: pdef };
     }
-    return {defType: "M", def: mdef};
+    return { defType: "M", def: mdef };
   }
-  return {defType: "A", def: Math.floor((pdef + mdef) / 2)};
+  return { defType: "A", def: Math.floor((pdef + mdef) / 2) };
 }
 
 function createNpcMove(
@@ -194,6 +195,20 @@ function createNpcMove(
   return new NpcMove(npcCardIndex, tileIndex, targetScore + wallHugScore);
 }
 
+function getAtkEventType(atkType: string) {
+  if (atkType === "P") {
+    return EventType.SWORD_ATK;
+  }
+  return EventType.MAGIC_ATK;
+}
+
+function getDefEventType(defType: string) {
+  if (defType === "P") {
+    return EventType.SWORD_DEF;
+  }
+  return EventType.MAGIC_DEF;
+}
+
 const flipAllEncounters = (
   atkCard: GameCard,
   tileIndex: number,
@@ -244,7 +259,10 @@ const flipAllEncounters = (
     gameState: EVENTS_PLAYING,
     remarks: "357",
     logs: enemyFlipIds.length > 1 ? [
-      new GameLog(`${atkCard.getFullName()} is combo-ing ${enemyFlipIds.length} enemies!`)
+      new GameLog(
+        `${atkCard.getFullName()} is combo-ing ${enemyFlipIds.length} enemies!`,
+        EventType.COMBO,
+      )
     ] : [],
     shimmerIds: enemyFlipIds,
   });
@@ -254,7 +272,10 @@ const flipAllEncounters = (
       tileSet: cloneTileCards(simulatedTileCards),
       gameState: EVENTS_PLAYING,
       logs: [
-        new GameLog(`${atkCard.getFullName()} combo'd ${simulatedTileCards[enemyFlipId]!.getFullName()}!`)
+        new GameLog(
+          `${atkCard.getFullName()} combo'd ${simulatedTileCards[enemyFlipId]!.getFullName()}!`,
+          EventType.COMBO,
+        )
       ],
       remarks: "360"
     });
@@ -293,7 +314,7 @@ const enemyPlay = (
     tileSet: cloneTileCards(simulatedTileCards),
     gameState: EVENTS_PLAYING,
     npcCards: newNpcCards,
-    logs: [],
+    logs: [new GameLog("", EventType.CARD_FLIP)],
     remarks: "408"
   });
 
@@ -362,14 +383,20 @@ const startBattle = (
   const defCard = simulatedTileCards[defCardIndex]!;
 
   const counterDef = getCounterDef(atkCard.atkType, defCard.pdef, defCard.mdef);
+  const shouldFlipCoin = atkCard.atk === counterDef.def;
   const flipBattleLost = Math.floor(Math.random() * 256) < 128;
   gameEvents.push({
     tileSet: cloneTileCards(simulatedTileCards),
     gameState: EVENTS_PLAYING,
     logs: [
-      new GameLog(`${atkCard.getFullName()} attacks ${defCard.getFullName()}!`),
+      new GameLog(`${atkCard.getFullName()} attacks ${defCard.getFullName()}!`, EventType.UNNAMED),
       new GameLog(
-        `${atkCard.atk} atk vs ${counterDef.def} def.${atkCard.atk === counterDef.def ? " Flipping coin..." : ""}`,
+        `${atkCard.atk} atk vs ${counterDef.def} def.${shouldFlipCoin ? " Flipping coin..." : ""}`,
+        shouldFlipCoin
+          ? EventType.COIN_FLIP
+          : atkCard.atk < counterDef.def
+            ? getDefEventType(counterDef.defType)
+            : getAtkEventType(atkCard.atkType),
         false,
         new BattleDetails(atkCard.atkType, counterDef.defType, atkCard.atk, counterDef.def, flipBattleLost),
       )
@@ -377,13 +404,13 @@ const startBattle = (
     shimmerIds: [atkCardIndex, defCardIndex],
     remarks: "383"
   });
-  if (atkCard.atk === counterDef.def) {
+  if (shouldFlipCoin) {
     if (flipBattleLost) {
       atkCard.flip();
       gameEvents.push({
         tileSet: simulatedTileCards,
         gameState: EVENTS_PLAYING,
-        logs: [new GameLog(`${atkCard.getFullName()} loses...`)],
+        logs: [new GameLog(`${atkCard.getFullName()} loses...`, EventType.CARD_FLIP)],
         shimmerIds: [atkCardIndex],
         remarks: "376"
       });
@@ -393,7 +420,7 @@ const startBattle = (
     gameEvents.push({
       tileSet: simulatedTileCards,
       gameState: EVENTS_PLAYING,
-      logs: [new GameLog(`${defCard.getFullName()} loses...`)],
+      logs: [new GameLog(`${defCard.getFullName()} loses...`, EventType.CARD_FLIP)],
       shimmerIds: [defCardIndex],
       remarks: "380"
     });
@@ -404,7 +431,7 @@ const startBattle = (
     gameEvents.push({
       tileSet: simulatedTileCards,
       gameState: EVENTS_PLAYING,
-      logs: [new GameLog(`${atkCard.getFullName()} loses...`)],
+      logs: [new GameLog(`${atkCard.getFullName()} loses...`, EventType.CARD_FLIP)],
       shimmerIds: [atkCardIndex],
       remarks: "369"
     });
@@ -414,7 +441,7 @@ const startBattle = (
   gameEvents.push({
     tileSet: simulatedTileCards,
     gameState: EVENTS_PLAYING,
-    logs: [new GameLog(`${defCard.getFullName()} loses...`)],
+    logs: [new GameLog(`${defCard.getFullName()} loses...`, EventType.CARD_FLIP)],
     shimmerIds: [defCardIndex],
     remarks: "384"
   });
@@ -503,6 +530,7 @@ export async function simulateEventResultsAfterCardPlay(
         new GameLog(
           `${atkCard.getFullName()} is surrounded! ` +
           `Countered by ${enemyCounterIds.length} enemies. Choose enemy target.`,
+          EventType.CHOOSE_ENEMY,
           true
         )
       ],
@@ -567,14 +595,6 @@ export async function simulateEventResultsAfterChoosingEnemyCounter(
 
   if (battleResult < 0) {
     simulatedTileCards = flipAllEncounters(atkCard, attackingTileIndex, simulatedTileCards, voidTileIds, false, gameEvents);
-    gameEvents.push({
-      tileSet: simulatedTileCards,
-      gameState: EVENTS_PLAYING,
-      logs: [],
-      remarks: "555",
-      enemyCounterIds: [],
-      attackingTileId: null,
-    });
     enemyPlay(simulatedTileCards, voidTileIds, npcCards, gameEvents);
     return gameEvents;
   }
@@ -588,7 +608,7 @@ export async function simulateEventResultsAfterChoosingEnemyCounter(
     gameEvents.push({
       tileSet: simulatedTileCards,
       gameState: CHOOSE_ENEMY,
-      logs: [new GameLog(`Choose another enemy target.`)],
+      logs: [new GameLog(`Choose another enemy target.`, EventType.CHOOSE_ENEMY)],
       remarks: "480",
       enemyCounterIds: enemyCounterIds2,
     });
@@ -599,7 +619,7 @@ export async function simulateEventResultsAfterChoosingEnemyCounter(
     const battleResult2 = startBattle(simulatedTileCards, attackingTileIndex, enemyCounterIds2[0], gameEvents);
 
     if (battleResult2 < 0) {
-      simulatedTileCards = flipAllEncounters(atkCard, attackingTileIndex, simulatedTileCards, voidTileIds,false, gameEvents);
+      simulatedTileCards = flipAllEncounters(atkCard, attackingTileIndex, simulatedTileCards, voidTileIds, false, gameEvents);
     } else {
       simulatedTileCards = flipAllEncounters(defCard2, enemyCounterIds2[0], simulatedTileCards, voidTileIds, true, gameEvents);
       simulatedTileCards = flipAllEncounters(atkCard, attackingTileIndex, simulatedTileCards, voidTileIds, true, gameEvents);
@@ -607,14 +627,6 @@ export async function simulateEventResultsAfterChoosingEnemyCounter(
   } else {
     simulatedTileCards = flipAllEncounters(atkCard, attackingTileIndex, simulatedTileCards, voidTileIds, true, gameEvents);
   }
-  gameEvents.push({
-    tileSet: simulatedTileCards,
-    gameState: EVENTS_PLAYING,
-    logs: [],
-    remarks: "598",
-    enemyCounterIds: [],
-    attackingTileId: null,
-  });
   enemyPlay(simulatedTileCards, voidTileIds, npcCards, gameEvents);
 
   return gameEvents;

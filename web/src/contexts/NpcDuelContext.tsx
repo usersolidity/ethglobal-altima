@@ -17,6 +17,16 @@ import {
 } from "../repositories/NpcDuelEventRepository";
 import GameLog from "../models/GameLog";
 import DuelResult from "../models/DuelResult";
+import EventType from "../models/EventType";
+import useSound from "use-sound";
+import CardPlayFX from "../audio/card/card-play.mp3"
+import CardFlipFX from "../audio/card/card-flip.mp3"
+import CoinFlipFX from "../audio/coin-flip.mp3"
+import SwordAttackFX from "../audio/attack/sword-attack.mp3"
+import SwordDefenseFX from "../audio/defense/sword-defense.mp3"
+import MagicAttackFX from "../audio/attack/magic-attack.mp3"
+import MagicDefenseFX from "../audio/defense/magic-defense.mp3"
+import ComboFX from "../audio/combo.mp3"
 
 export type CardSet = Array<GameCard>;
 
@@ -71,9 +81,15 @@ type LogAction = {
 function logsReducer(state: Array<DuelLog>, action: LogAction) {
   switch (action.type) {
     case ADD_LOG:
-      return [...state, new DuelLog(state.length, new GameLog(action.message, true))];
+      return [
+        ...state,
+        new DuelLog(state.length, new GameLog(action.message, EventType.UNNAMED, true))
+      ];
     case ADD_LOGS:
-      return [...state, ...action.messages.map((message, i) => new DuelLog(state.length + i, message))];
+      return [
+        ...state,
+        ...action.messages.map((message, i) => new DuelLog(state.length + i, message))
+      ];
     case CLEAR_LOGS:
       return [];
     default:
@@ -146,6 +162,14 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
   const [enemyGoesFirst, setEnemyGoesFirst] = useState<boolean>(false);
   const [logs, logsDispatch] = useReducer(logsReducer, []);
   const [delayedEvents, delayedEventsDispatch] = useReducer(delayedEventsReducer, []);
+  const [cardPlaySound] = useSound(CardPlayFX)
+  const [cardFlipSound] = useSound(CardFlipFX)
+  const [swordAttackSound] = useSound(SwordAttackFX)
+  const [swordDefenseSound] = useSound(SwordDefenseFX)
+  const [magicAttackSound] = useSound(MagicAttackFX)
+  const [magicDefenseSound] = useSound(MagicDefenseFX)
+  const [coinFlipSound] = useSound(CoinFlipFX)
+  const [comboSound] = useSound(ComboFX)
 
   console.log("STATUS", status);
 
@@ -207,6 +231,33 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
         setNpcCards(delayedEvent.npcCards);
       }
 
+      delayedEvent.logs.forEach(gameLog => {
+        if (gameLog.eventType === EventType.CARD_FLIP) {
+          cardFlipSound();
+        }
+        if (gameLog.eventType === EventType.COMBO) {
+          comboSound();
+        }
+        if (gameLog.eventType === EventType.CARD_PLAY) {
+          cardPlaySound();
+        }
+        if (gameLog.eventType === EventType.COIN_FLIP) {
+          coinFlipSound();
+        }
+        if (gameLog.eventType === EventType.SWORD_ATK) {
+          swordAttackSound();
+        }
+        if (gameLog.eventType === EventType.SWORD_DEF) {
+          swordDefenseSound();
+        }
+        if (gameLog.eventType === EventType.MAGIC_ATK) {
+          magicAttackSound();
+        }
+        if (gameLog.eventType === EventType.MAGIC_DEF) {
+          magicDefenseSound();
+        }
+      });
+
       setEnemyCounters(delayedEvent.enemyCounterIds || []);
 
       setAttackingTileCard(delayedEvent.attackingTileId || null);
@@ -247,6 +298,8 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
     ) as TileSet
     setTileCards(cloneTileCards(simulatedTileCards));
     setChosenPlayerCardIndex(null);
+
+    cardFlipSound();
 
     setStatus(EVENTS_PLAYING);
 

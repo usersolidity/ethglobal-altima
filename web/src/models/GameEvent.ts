@@ -46,6 +46,7 @@ export default class GameEvent {
     this.gameState = gameState;
     this.logs = logs.map(log => new GameLog(
       log.message,
+      log.eventType,
       log.persisting,
       log.battleDetails && new BattleDetails(
         log.battleDetails.atkType,
