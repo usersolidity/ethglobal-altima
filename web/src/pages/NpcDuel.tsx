@@ -231,7 +231,15 @@ export default function NpcDuel() {
   useEffect(() => {
     (async () => {
       const newWeb3Provider = await Moralis.enableWeb3();
-      if (newWeb3Provider) setWeb3Provider(newWeb3Provider);
+      if (newWeb3Provider) {
+        const network = await newWeb3Provider.detectNetwork();
+        if (network.name !== "maticmum") {
+          alert("Please connect to the Polygon Mumbai network.");
+          await Moralis.deactivateWeb3();
+          return;
+        }
+        setWeb3Provider(newWeb3Provider);
+      }
     })();
   }, []);
 
@@ -271,7 +279,7 @@ export default function NpcDuel() {
     <AppContainer>
       <LogsSection>
         {isAuthenticated ? (
-          <BlueButton onClick={earlyMintNFT}>Mint ({totalSupply} / {maxSupply})</BlueButton>
+          <BlueButton onClick={earlyMintNFT}>Mint ({totalSupply || "..."} / {maxSupply || "..."})</BlueButton>
         ) : (
           isAuthenticating ? (
             <BlueButton disabled>Authenticating...</BlueButton>
