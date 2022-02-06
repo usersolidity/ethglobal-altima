@@ -6,17 +6,17 @@ import GameCard from "../models/GameCard";
 import NpcCardArea from "../components/duel/NpcCardArea";
 import PlayerCardArea from "../components/duel/PlayerCardArea";
 import TileComponent from "../components/duel/TileComponent";
-import { fetchCardsOfProfile, fetchCardsWithOffset } from "../repositories/NpcCardRepository";
+import { fetchCardsWithOffset } from "../repositories/NpcCardRepository";
 import { TileSet } from "../models/TileSet";
 import BattleAnimation from "../components/duel/BattleAnimation";
 import AtkDefIcon from "../components/duel/AtkDefIcon";
 // import { Web3Context } from "../contexts/Web3Context";
 import Card from "../models/Card";
 import Background from "../images/altima-background.png";
-import CardHolderBackground from "../images/card-holder.png";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../constants/ContractConstants";
-import Moralis from "moralis";
+import DuelResultAnimation from "../components/duel/DuelResultAnimation";
+import DuelResult from "../models/DuelResult";
 
 const AppContainer = styled.div`
   display: flex;
@@ -36,13 +36,35 @@ const AppContainer = styled.div`
 
 const LogsSection = styled.section`
   flex: 1;
+  display: flex;
+  flex-direction: column;
   color: white;
   align-self: flex-start;
-  align-items: flex-end;
+  text-align: left;
+
+  justify-content: space-between;
+  height: 100vh;
+
+  @media (max-width: 844px) {
+    height: auto;
+    overflow: auto;
+    width: 100%;
+  }
+`;
+
+const ConnectButtonContainer = styled.div`
+  flex: 1;
   padding-top: 24px;
   padding-left: 24px;
   padding-bottom: 24px;
-  text-align: left;
+`;
+
+const PersistentDuelLogs = styled.div`
+  flex: 1;
+  padding: 24px;
+  background-color: rgba(13, 50, 72, 0.5);
+  border: 1px solid #416983;
+  overflow: scroll;
 `;
 
 const BattlefieldSection = styled.section`
@@ -297,20 +319,24 @@ export default function NpcDuel() {
   return (
     <AppContainer>
       <LogsSection>
-        {isAuthenticated ? (
-          <BlueButton onClick={earlyMintNFT}>Mint ({totalSupply || "..."} / {maxSupply || "..."})</BlueButton>
-        ) : (
-          isAuthenticating ? (
-            <BlueButton disabled>Authenticating...</BlueButton>
+        <ConnectButtonContainer>
+          {isAuthenticated ? (
+            <BlueButton onClick={earlyMintNFT}>Mint ({totalSupply || "..."} / {maxSupply || "..."})</BlueButton>
           ) : (
-            <BlueButton onClick={() => authenticate({ signingMessage: "Welcome to Altima" })}>
-              Connect Wallet
-            </BlueButton>
-          )
-        )}
-        {duelContext?.logs.map((log, id) => (
-          <div key={id}>{log.message.message}</div>
-        ))}
+            isAuthenticating ? (
+              <BlueButton disabled>Authenticating...</BlueButton>
+            ) : (
+              <BlueButton onClick={() => authenticate({ signingMessage: "Welcome to Altima" })}>
+                Connect Wallet
+              </BlueButton>
+            )
+          )}
+        </ConnectButtonContainer>
+        <PersistentDuelLogs>
+          {duelContext?.logs.map((log, id) => (
+            <div key={id}>{log.message.message}</div>
+          ))}
+        </PersistentDuelLogs>
       </LogsSection>
       <BattlefieldSection>
         {duelContext?.gameStarted() && (
@@ -356,6 +382,9 @@ export default function NpcDuel() {
             </DuelLog>
           ))}
         </DuelLogs>
+        {duelContext?.duelResult && (
+          <DuelResultAnimation result={duelContext?.duelResult} />
+        )}
       </RestartGameSection>
 
     </AppContainer>

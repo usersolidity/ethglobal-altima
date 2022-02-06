@@ -36,7 +36,7 @@ const TileContainer = styled.div<ITileContainerProps>`
   border: 2px solid #eee;
   justify-content: center;
   align-items: center;
-  background-color: rgba(46, 46, 46, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
 
   ${props => props.clickable && `
     cursor: pointer;

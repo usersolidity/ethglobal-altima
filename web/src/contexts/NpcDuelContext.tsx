@@ -16,6 +16,7 @@ import {
   simulateEventResultsAfterChoosingEnemyCounter
 } from "../repositories/NpcDuelEventRepository";
 import GameLog from "../models/GameLog";
+import DuelResult from "../models/DuelResult";
 
 export type CardSet = Array<GameCard>;
 
@@ -37,6 +38,7 @@ type NpcDuelContextValue = {
   status: GameState;
   logs: Array<DuelLog>;
   getRecentLogs: () => Array<DuelLog>;
+  duelResult: DuelResult | null;
 }
 
 export const NpcDuelContext = createContext<NpcDuelContextValue | null>(null);
@@ -140,6 +142,7 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
   const [shimmerIds, setShimmerIds] = useState<Array<number>>([]);
   const [attackingTileCard, setAttackingTileCard] = useState<number | null>(null);
   const [status, setStatus] = useState<GameState>(GAME_NOT_STARTED);
+  const [duelResult, setDuelResult] = useState<DuelResult | null>(null);
   const [enemyGoesFirst, setEnemyGoesFirst] = useState<boolean>(false);
   const [logs, logsDispatch] = useReducer(logsReducer, []);
   const [delayedEvents, delayedEventsDispatch] = useReducer(delayedEventsReducer, []);
@@ -169,18 +172,23 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
           if (playerScore === 10) {
             logsDispatch({ type: ADD_LOG, message: "GAME COMPLETE! PERFECT!" });
             localStorage.setItem("perfect-wins", String(++playerPerfectWins));
+            setDuelResult(DuelResult.PERFECT);
           } else if (playerScore === 5) {
             logsDispatch({ type: ADD_LOG, message: "GAME COMPLETE! DRAW!" });
             localStorage.setItem("draws", String(++playerDraws));
+            setDuelResult(DuelResult.DRAW);
           } else if (playerScore === 0) {
             logsDispatch({ type: ADD_LOG, message: "GAME COMPLETE! YOU PERFECTLY LOST!!" });
             localStorage.setItem("perfect-losses", String(++playerPerfectLosses));
+            setDuelResult(DuelResult.EPIC_FAIL);
           } else if (playerScore < 5) {
             logsDispatch({ type: ADD_LOG, message: `GAME COMPLETE! YOU LOSE! ${playerScore} - ${opponentScore}` });
             localStorage.setItem("losses", String(++playerLosses));
+            setDuelResult(DuelResult.LOSE);
           } else {
             logsDispatch({ type: ADD_LOG, message: `GAME COMPLETE! YOU WIN! ${playerScore} - ${opponentScore}` });
             localStorage.setItem("wins", String(++playerWins));
+            setDuelResult(DuelResult.VICTORY);
           }
         }
         return;
@@ -278,6 +286,7 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
     setNpcCards(npcSet);
     setPlayerCards(playerSet);
     setTileCards(Array(16).fill(null) as TileSet);
+    setDuelResult(null);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setVoidTileIds(Array(Math.floor(Math.random() * 5)).fill(null).map(_ => Math.floor(Math.random() * 16)));
     delayedEventsDispatch({ type: CLEAR_EVENTS });
@@ -335,6 +344,7 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
         chooseEnemyCounter,
         logs,
         getRecentLogs,
+        duelResult,
       }}
     >
       {props.children}

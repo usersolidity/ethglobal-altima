@@ -11,6 +11,5 @@ export default class DuelLog {
     this.id = id;
     this.message = message;
     this.createdAt = new Date().getTime();
-    console.log(this.createdAt);
   }
 }
