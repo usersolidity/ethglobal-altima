@@ -111,7 +111,7 @@ const BattleIconAndValue = styled.div<BattleIconAndValueProps>`
 
   ${props => props.left && css`margin-right: 16px;`}
 
-  animation: ${props => props.left ? comeInFromLeft : comeInFromRight} .25s ${props => props.defeated && css`, ${props.left ? defeatToLeft : defeatToRight} .75 s .25 s`};
+  animation: ${props => props.left ? comeInFromLeft : comeInFromRight} .25s ${props => props.defeated && css`, ${props.left ? defeatToLeft : defeatToRight} .75s .25s`};
 `;
 
 BattleIconAndValue.defaultProps = {
