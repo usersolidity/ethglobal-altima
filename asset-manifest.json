@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://clrke.github.io/ethglobal-altima/static/css/main.ea74e5c0.css",
-    "main.js": "https://clrke.github.io/ethglobal-altima/static/js/main.625fc5e8.js",
+    "main.js": "https://clrke.github.io/ethglobal-altima/static/js/main.aec8cd67.js",
     "static/js/787.d1d4a2c2.chunk.js": "https://clrke.github.io/ethglobal-altima/static/js/787.d1d4a2c2.chunk.js",
     "static/media/altima-background.png": "https://clrke.github.io/ethglobal-altima/static/media/altima-background.bbdb684a81ddf217ccd5.png",
     "static/media/fox.png": "https://clrke.github.io/ethglobal-altima/static/media/fox.6cb5169edb2dea3d281f.png",
@@ -13,11 +13,11 @@
     "static/media/blue-card.jpeg": "https://clrke.github.io/ethglobal-altima/static/media/blue-card.1384c6baf968a8e4171e.jpeg",
     "index.html": "https://clrke.github.io/ethglobal-altima/index.html",
     "main.ea74e5c0.css.map": "https://clrke.github.io/ethglobal-altima/static/css/main.ea74e5c0.css.map",
-    "main.625fc5e8.js.map": "https://clrke.github.io/ethglobal-altima/static/js/main.625fc5e8.js.map",
+    "main.aec8cd67.js.map": "https://clrke.github.io/ethglobal-altima/static/js/main.aec8cd67.js.map",
     "787.d1d4a2c2.chunk.js.map": "https://clrke.github.io/ethglobal-altima/static/js/787.d1d4a2c2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea74e5c0.css",
-    "static/js/main.625fc5e8.js"
+    "static/js/main.aec8cd67.js"
   ]
 }
