@@ -10,7 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL} initializeOnMount>
       <App />
-    </MoralisProvider>,
+    </MoralisProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

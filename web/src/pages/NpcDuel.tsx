@@ -48,15 +48,28 @@ const BattlefieldSection = styled.section`
   flex: 3;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  overflow: scroll;
+  height: 100vh;
+
+  @media (max-width: 844px) {
+    height: auto;
+    overflow: auto;
+  }
 `;
 
 const RestartGameSection = styled.section`
   flex: 1;
   align-self: flex-start;
   align-items: flex-end;
-  margin-top: 24px;
-  margin-right: 24px;
+  padding-top: 24px;
+  padding-right: 24px;
+  padding-bottom: 24px;
   text-align: right;
+
+  @media (max-width: 844px) {
+    align-self: flex-end;
+  }
 `;
 
 const DuelResultStat = styled.div`
@@ -68,10 +81,15 @@ const DuelScene = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+
+  @media (max-width: 844px) {
+    height: auto;
+  }
 `
 
 const DuelArena = styled.div`
-  flex: 1;
+  flex: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -301,32 +319,6 @@ export default function NpcDuel() {
               <DuelArenaComponent tiles={duelContext?.tileCards} voidTileIds={duelContext?.voidTileIds} />
             )}
             <PlayerCardArea cards={duelContext?.playerCards!} />
-            <DuelLogs>
-              {duelContext?.getRecentLogs().map(log => (
-                <DuelLog key={log.id} persisting={log.message.persisting}>
-                  {log.message.battleDetails ? (
-                    <>
-                      <>
-                        <AtkDefIcon
-                          src={log.message.battleDetails.getAtkIcon()}
-                          alt={log.message.battleDetails.atkType}
-                        />
-                        <span>{log.message.battleDetails.atk} atk vs </span>
-                        <AtkDefIcon
-                          src={log.message.battleDetails.getDefIcon()}
-                          alt={log.message.battleDetails.defType}
-                        />
-                        <span>
-                          {log.message.battleDetails.def} def.
-                          {log.message.battleDetails.atk === log.message.battleDetails.def ? " Flipping coin..." : ""}
-                        </span>
-                      </>
-                      <BattleAnimation battleDetails={log.message.battleDetails} />
-                    </>
-                  ) : log.message.message}
-                </DuelLog>
-              ))}
-            </DuelLogs>
           </DuelScene>
         )}
       </BattlefieldSection>
@@ -337,6 +329,32 @@ export default function NpcDuel() {
         <DuelResultStat>Draws: {localStorage.getItem("draws") || 0}</DuelResultStat>
         <DuelResultStat>Losses: {localStorage.getItem("losses") || 0}</DuelResultStat>
         <DuelResultStat>Perfect Losses: {localStorage.getItem("perfect-losses") || 0}</DuelResultStat>
+        <DuelLogs>
+          {duelContext?.getRecentLogs().map(log => (
+            <DuelLog key={log.id} persisting={log.message.persisting}>
+              {log.message.battleDetails ? (
+                <>
+                  <>
+                    <AtkDefIcon
+                      src={log.message.battleDetails.getAtkIcon()}
+                      alt={log.message.battleDetails.atkType}
+                    />
+                    <span>{log.message.battleDetails.atk} atk vs </span>
+                    <AtkDefIcon
+                      src={log.message.battleDetails.getDefIcon()}
+                      alt={log.message.battleDetails.defType}
+                    />
+                    <span>
+                          {log.message.battleDetails.def} def.
+                      {log.message.battleDetails.atk === log.message.battleDetails.def ? " Flipping coin..." : ""}
+                        </span>
+                  </>
+                  <BattleAnimation battleDetails={log.message.battleDetails} />
+                </>
+              ) : log.message.message}
+            </DuelLog>
+          ))}
+        </DuelLogs>
       </RestartGameSection>
 
     </AppContainer>

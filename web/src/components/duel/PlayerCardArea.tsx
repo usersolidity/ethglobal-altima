@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useContext } from "react";
+import React, { createRef, useContext, useEffect, useRef } from "react";
 import CardComponent from "./CardComponent";
 import { CardSet, NpcDuelContext } from "../../contexts/NpcDuelContext";
 import { CHOOSE_PLAYER_CARD_AND_TILE } from "../../models/GameEvent";
@@ -24,7 +24,7 @@ interface CardsContainerProps {
 
 const CardsContainer = styled.div<CardsContainerProps>`
   flex: 0;
-  width: 1280px;
+  width: 640px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -76,10 +76,16 @@ const CardRotate = styled.div<CardRotateProps>`
 
 function PlayerCardArea({ cards }: IProps) {
   const duelContext = useContext(NpcDuelContext);
+  const scrollRef = useRef<any>();
+  const scrollChildRef = useRef<any>();
+
+  useEffect(() => {
+    scrollRef.current.scrollTo(scrollChildRef.current.scrollWidth - scrollRef.current.clientWidth, 0);
+  }, [cards]);
 
   return (
-    <CardsScrollContainer>
-      <CardsContainer length={cards.length}>
+    <CardsScrollContainer ref={scrollRef}>
+      <CardsContainer ref={scrollChildRef} length={cards.length}>
         {cards.map((card, index) => (
           <CardRotate key={card.id} index={index} length={cards.length}>
             <CardComponent
