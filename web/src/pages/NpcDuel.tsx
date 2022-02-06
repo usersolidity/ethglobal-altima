@@ -64,7 +64,7 @@ const PersistentDuelLogs = styled.div`
   padding: 24px;
   background-color: rgba(13, 50, 72, 0.5);
   border: 1px solid #416983;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const BattlefieldSection = styled.section`
@@ -72,7 +72,7 @@ const BattlefieldSection = styled.section`
   flex-direction: column;
   justify-content: center;
   position: relative;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 100vh;
 
   @media (max-width: 844px) {
