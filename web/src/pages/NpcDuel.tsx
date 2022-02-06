@@ -261,7 +261,7 @@ export default function NpcDuel() {
       })))
       setMaxSupply(+(await Moralis.executeFunction({
         contractAddress: CONTRACT_ADDRESS,
-        functionName: "ALTIMA_FREE_COUNT",
+        functionName: "ALTIMA_MAX",
         abi: CONTRACT_ABI,
       })));
     }
@@ -290,12 +290,13 @@ export default function NpcDuel() {
     })();
   }, [web3Provider]);
 
-  const earlyMintNFT = async () => {
+  const mintNft = async () => {
     await web3.fetch({
       params: {
         contractAddress: CONTRACT_ADDRESS,
-        functionName: "earlyMint",
+        functionName: "mint",
         abi: CONTRACT_ABI,
+        msgValue: Moralis.Units.ETH(0.01),
       },
       onComplete: async () => {
         await refreshMintSupplies();
@@ -303,25 +304,12 @@ export default function NpcDuel() {
     });
   }
 
-  // const mintNFT = async () => {
-  //   let options = {
-  //      contractAddress: "",
-  //      functionName: "earlyMint",
-  //      abi:[],
-  //   },
-  //   msgValue: Moralis.Units.ETH(0.01), // Todo: not sure if this is correct
-
-  //   await web3Context.fetch({
-  //     params: options,
-  //   });
-  // }
-
   return (
     <AppContainer>
       <LogsSection>
         <ConnectButtonContainer>
           {isAuthenticated ? (
-            <BlueButton onClick={earlyMintNFT}>Mint ({totalSupply || "..."} / {maxSupply || "..."})</BlueButton>
+            <BlueButton onClick={mintNft}>Mint ({totalSupply || "..."} / {maxSupply || "..."})</BlueButton>
           ) : (
             isAuthenticating ? (
               <BlueButton disabled>Authenticating...</BlueButton>
