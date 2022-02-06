@@ -258,12 +258,15 @@ const flipAllEncounters = (
     tileSet: cloneTileCards(simulatedTileCards),
     gameState: EVENTS_PLAYING,
     remarks: "357",
-    logs: enemyFlipIds.length > 1 ? [
+    logs: [
       new GameLog(
-        `${atkCard.getFullName()} is combo-ing ${enemyFlipIds.length} enemies!`,
+      enemyFlipIds.length > 1
+        ? `${atkCard.getFullName()} is combo-ing ${enemyFlipIds.length} enemies!`
+        : "",
         EventType.COMBO,
+        false,
       )
-    ] : [],
+    ],
     shimmerIds: enemyFlipIds,
   });
   enemyFlipIds.forEach(enemyFlipId => {
@@ -274,7 +277,7 @@ const flipAllEncounters = (
       logs: [
         new GameLog(
           `${atkCard.getFullName()} combo'd ${simulatedTileCards[enemyFlipId]!.getFullName()}!`,
-          EventType.COMBO,
+          EventType.CARD_FLIP,
         )
       ],
       remarks: "360"
