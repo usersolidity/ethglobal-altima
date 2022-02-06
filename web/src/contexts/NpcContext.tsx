@@ -18,7 +18,7 @@ export default function NpcContextProvider(props: PropsWithChildren<IProps>) {
   useEffect(() => {
     (async () => {
       setCards(await fetchCardsWithOffset(
-        20, 20 * parseInt('0', 10) + 1
+        100, 1,
       ));
     })();
   }, []);

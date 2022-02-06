@@ -239,9 +239,9 @@ export default function NpcDuel() {
           )) : [];
         */
         if (!deck || !deck.length) {
-          deck = shuffle(await fetchCardsWithOffset(20, 41));
+          deck = shuffle(await fetchCardsWithOffset(100, 101));
         }
-        const playerCards = deck.slice(5, 10).map(card => GameCard.createFromCard(true, card));
+        const playerCards = deck.slice(0, 5).map(card => GameCard.createFromCard(true, card));
 
         duelContext?.setCards(npcCards, playerCards);
       })();
