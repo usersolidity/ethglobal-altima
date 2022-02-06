@@ -1,9 +1,14 @@
 {
   "files": {
     "main.css": "https://clrke.github.io/ethglobal-altima/static/css/main.ea74e5c0.css",
-    "main.js": "https://clrke.github.io/ethglobal-altima/static/js/main.24abb328.js",
+    "main.js": "https://clrke.github.io/ethglobal-altima/static/js/main.73ea0370.js",
     "static/js/787.d1d4a2c2.chunk.js": "https://clrke.github.io/ethglobal-altima/static/js/787.d1d4a2c2.chunk.js",
     "static/media/altima-background.png": "https://clrke.github.io/ethglobal-altima/static/media/altima-background.bbdb684a81ddf217ccd5.png",
+    "static/media/draw.png": "https://clrke.github.io/ethglobal-altima/static/media/draw.30995ce011b5aee4c2d2.png",
+    "static/media/victory.png": "https://clrke.github.io/ethglobal-altima/static/media/victory.b8f7a9efc537b8cf72a9.png",
+    "static/media/lose.png": "https://clrke.github.io/ethglobal-altima/static/media/lose.07c8a55fdba8884f1c56.png",
+    "static/media/fail.png": "https://clrke.github.io/ethglobal-altima/static/media/fail.9d1b83fedf0461859c7d.png",
+    "static/media/perfect.png": "https://clrke.github.io/ethglobal-altima/static/media/perfect.d1d4d64328ac99629574.png",
     "static/media/fox.png": "https://clrke.github.io/ethglobal-altima/static/media/fox.6cb5169edb2dea3d281f.png",
     "static/media/lion.png": "https://clrke.github.io/ethglobal-altima/static/media/lion.3193d0472f11fe6c9209.png",
     "static/media/cat.png": "https://clrke.github.io/ethglobal-altima/static/media/cat.40a9ae725ce21ed2a162.png",
@@ -13,11 +18,11 @@
     "static/media/blue-card.jpeg": "https://clrke.github.io/ethglobal-altima/static/media/blue-card.1384c6baf968a8e4171e.jpeg",
     "index.html": "https://clrke.github.io/ethglobal-altima/index.html",
     "main.ea74e5c0.css.map": "https://clrke.github.io/ethglobal-altima/static/css/main.ea74e5c0.css.map",
-    "main.24abb328.js.map": "https://clrke.github.io/ethglobal-altima/static/js/main.24abb328.js.map",
+    "main.73ea0370.js.map": "https://clrke.github.io/ethglobal-altima/static/js/main.73ea0370.js.map",
     "787.d1d4a2c2.chunk.js.map": "https://clrke.github.io/ethglobal-altima/static/js/787.d1d4a2c2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea74e5c0.css",
-    "static/js/main.24abb328.js"
+    "static/js/main.73ea0370.js"
   ]
 }
