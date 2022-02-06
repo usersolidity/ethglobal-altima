@@ -1,5 +1,5 @@
 import Card, { ArrowChoices } from "../models/Card";
-import metadata from "../nft/metadata.json";
+import metadata from "../nft/metadata/metadata.json";
 
 interface ICardMap {
   [id: number]: Card;
