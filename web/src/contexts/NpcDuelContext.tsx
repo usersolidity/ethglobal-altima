@@ -287,7 +287,7 @@ export default function NpcDuelContextProvider(props: PropsWithChildren<IProps>)
     logsDispatch({ type: ADD_LOG, message: "Game Start" });
     const playerFirst = Math.floor(Math.random() * 256) < 128;
     if (playerFirst) {
-      logsDispatch({ type: ADD_LOG, message: "☟ You go first. Choose a card." });
+      logsDispatch({ type: ADD_LOG, message: "👈 You go first. Choose a card." });
       setStatus(CHOOSE_PLAYER_CARD_AND_TILE);
     } else {
       logsDispatch({ type: ADD_LOG, message: "Opponent goes first." });

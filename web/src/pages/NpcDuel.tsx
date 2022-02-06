@@ -26,7 +26,7 @@ const AppContainer = styled.div`
   height: 100vh;
   background: url(${Background}) no-repeat center center;
   background-size: cover;
-  
+
   @media (max-width: 844px) {
     flex-direction: column-reverse;
     min-height: 100vh;
@@ -36,8 +36,12 @@ const AppContainer = styled.div`
 
 const LogsSection = styled.section`
   flex: 1;
-  margin: 16px;
   color: white;
+  align-self: flex-start;
+  align-items: flex-end;
+  margin-top: 24px;
+  margin-left: 24px;
+  text-align: left;
 `;
 
 const BattlefieldSection = styled.section`
@@ -48,6 +52,11 @@ const BattlefieldSection = styled.section`
 
 const RestartGameSection = styled.section`
   flex: 1;
+  align-self: flex-start;
+  align-items: flex-end;
+  margin-top: 24px;
+  margin-right: 24px;
+  text-align: right;
 `;
 
 const DuelResultStat = styled.div`
@@ -98,7 +107,7 @@ const DuelLogs = styled.div`
   overflow: auto;
   margin: auto;
   position: fixed;
-  top: 0;
+  bottom: 0;
   right: 0;
   z-index: 3;
   display: flex;
@@ -137,6 +146,25 @@ const DuelLog = styled.div<IDuelLogProps>`
   text-align: center;
   padding: 8px;
   background-color: rgba(0.2, 0.2, 0.2, 0.8);
+`;
+
+const BlueButton = styled.button`
+  margin-top: 8px;
+  margin-bottom: 24px;
+  padding: 8px;
+  border: none;
+  background-color: #B1D0E0;
+  color: #416983;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  text-transform: capitalize;
+
+  transition: all 0.5s ease-in-out;
+
+  :hover {
+    background-color: #61dafb;
+  }
 `;
 
 function shuffle<T>(array: Array<T>): Array<T> {
@@ -199,7 +227,7 @@ export default function NpcDuel() {
   }
 
 
-  useEffect(initializeGame, []);
+  useEffect(initializeGame, [npcContext?.cards]);
   useEffect(() => {
     (async () => {
       const newWeb3Provider = await Moralis.enableWeb3();
@@ -242,6 +270,17 @@ export default function NpcDuel() {
   return (
     <AppContainer>
       <LogsSection>
+        {isAuthenticated ? (
+          <BlueButton onClick={earlyMintNFT}>Mint ({totalSupply} / {maxSupply})</BlueButton>
+        ) : (
+          isAuthenticating ? (
+            <BlueButton disabled>Authenticating...</BlueButton>
+          ) : (
+            <BlueButton onClick={() => authenticate({ signingMessage: "Welcome to Altima" })}>
+              Connect Wallet
+            </BlueButton>
+          )
+        )}
         {duelContext?.logs.map((log, id) => (
           <div key={id}>{log.message.message}</div>
         ))}
@@ -284,19 +323,10 @@ export default function NpcDuel() {
         )}
       </BattlefieldSection>
       <RestartGameSection>
-        <DuelResultStat>Winner: {localStorage.getItem("wins") || 0}</DuelResultStat>
+        <BlueButton onClick={initializeGame}>Restart Game</BlueButton>
+        <DuelResultStat>Wins: {localStorage.getItem("wins") || 0}</DuelResultStat>
         <DuelResultStat>Losses: {localStorage.getItem("losses") || 0}</DuelResultStat>
         <DuelResultStat>Draws: {localStorage.getItem("draws") || 0}</DuelResultStat>
-        {isAuthenticated ? (
-          <button onClick={earlyMintNFT}>Mint ({totalSupply} / {maxSupply})</button>
-        ) : (
-          isAuthenticating ? (
-            <button>Authenticating...</button>
-          ) : (
-            <button onClick={() => authenticate({ signingMessage: "Welcome to Altima"})}>Connect Wallet</button>
-          )
-        )}
-        <button onClick={initializeGame}>Restart Game</button>
       </RestartGameSection>
 
     </AppContainer>
