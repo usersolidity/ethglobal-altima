@@ -17,6 +17,8 @@ import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../constants/ContractConstants";
 import DuelResultAnimation from "../components/duel/DuelResultAnimation";
 import DuelResult from "../models/DuelResult";
+import useSound from "use-sound"
+import GameStartFX from "../audio/game-start.mp3";
 
 const AppContainer = styled.div`
   display: flex;
@@ -221,11 +223,13 @@ export default function NpcDuel() {
   const [totalSupply, setTotalSupply] = useState<number | null>(null);
   const [maxSupply, setMaxSupply] = useState<number | null>(null);
   const [web3Provider, setWeb3Provider] = useState<any>(null);
+  const [gameStartSound] = useSound(GameStartFX, { volume: 0.10 })
 
   const initializeGame = () => {
     if (npcContext?.cards) {
       const shuffledCards = shuffle(npcContext?.cards);
       const npcCards = shuffledCards.slice(0, 5).map(card => GameCard.createFromCard(false, card));
+      gameStartSound();
       (async () => {
         let deck: Card[] = [];
         /*
