@@ -1,5 +1,5 @@
 enum DuelResult {
-  PERFECT,
+  PERFECT= 1,
   VICTORY,
   DRAW,
   LOSE,
