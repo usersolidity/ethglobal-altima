@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://clrke.github.io/ethglobal-altima/static/css/main.ea74e5c0.css",
-    "main.js": "https://clrke.github.io/ethglobal-altima/static/js/main.72d125e0.js",
+    "main.js": "https://clrke.github.io/ethglobal-altima/static/js/main.371db700.js",
     "static/js/845.d4b6b59c.chunk.js": "https://clrke.github.io/ethglobal-altima/static/js/845.d4b6b59c.chunk.js",
     "static/js/787.d1d4a2c2.chunk.js": "https://clrke.github.io/ethglobal-altima/static/js/787.d1d4a2c2.chunk.js",
     "static/media/altima-background.png": "https://clrke.github.io/ethglobal-altima/static/media/altima-background.bbdb684a81ddf217ccd5.png",
@@ -17,23 +17,24 @@
     "static/media/ostrich.png": "https://clrke.github.io/ethglobal-altima/static/media/ostrich.538f98b04536d6d36eb0.png",
     "static/media/sword-defense.mp3": "https://clrke.github.io/ethglobal-altima/static/media/sword-defense.07ce172233ffeab42f50.mp3",
     "static/media/magic-attack.mp3": "https://clrke.github.io/ethglobal-altima/static/media/magic-attack.bba5a6485b5be13c9e95.mp3",
+    "static/media/game-start.mp3": "https://clrke.github.io/ethglobal-altima/static/media/game-start.30a8a603f9280c7961ec.mp3",
     "static/media/magic-defense.mp3": "https://clrke.github.io/ethglobal-altima/static/media/magic-defense.df41d463b61147ec5874.mp3",
     "static/media/sword-attack.mp3": "https://clrke.github.io/ethglobal-altima/static/media/sword-attack.406302a52b0a488205cd.mp3",
+    "static/media/full-combo.mp3": "https://clrke.github.io/ethglobal-altima/static/media/full-combo.e85fe9d46b9128493cf9.mp3",
     "static/media/card-flip.mp3": "https://clrke.github.io/ethglobal-altima/static/media/card-flip.668dbee193ccb50f173c.mp3",
     "static/media/coin-flip.mp3": "https://clrke.github.io/ethglobal-altima/static/media/coin-flip.8e65838a5fd89928b15f.mp3",
     "static/media/orange-card.jpeg": "https://clrke.github.io/ethglobal-altima/static/media/orange-card.7eea5bf84cccd1bc5953.jpeg",
     "static/media/blue-card.jpeg": "https://clrke.github.io/ethglobal-altima/static/media/blue-card.1384c6baf968a8e4171e.jpeg",
     "static/media/card-play.mp3": "https://clrke.github.io/ethglobal-altima/static/media/card-play.8629fd720586d4b0d3ee.mp3",
     "static/media/card-click.mp3": "https://clrke.github.io/ethglobal-altima/static/media/card-click.04edff65181a82acc243.mp3",
-    "static/media/combo.mp3": "https://clrke.github.io/ethglobal-altima/static/media/combo.aaeab6d5a997ba5ab2d2.mp3",
     "index.html": "https://clrke.github.io/ethglobal-altima/index.html",
     "main.ea74e5c0.css.map": "https://clrke.github.io/ethglobal-altima/static/css/main.ea74e5c0.css.map",
-    "main.72d125e0.js.map": "https://clrke.github.io/ethglobal-altima/static/js/main.72d125e0.js.map",
+    "main.371db700.js.map": "https://clrke.github.io/ethglobal-altima/static/js/main.371db700.js.map",
     "845.d4b6b59c.chunk.js.map": "https://clrke.github.io/ethglobal-altima/static/js/845.d4b6b59c.chunk.js.map",
     "787.d1d4a2c2.chunk.js.map": "https://clrke.github.io/ethglobal-altima/static/js/787.d1d4a2c2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea74e5c0.css",
-    "static/js/main.72d125e0.js"
+    "static/js/main.371db700.js"
   ]
 }
