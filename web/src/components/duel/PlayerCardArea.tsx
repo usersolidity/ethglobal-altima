@@ -25,6 +25,7 @@ interface CardsContainerProps {
 const CardsContainer = styled.div<CardsContainerProps>`
   flex: 0;
   width: 640px;
+  min-height: 158px;
   display: flex;
   flex-direction: row;
   align-items: center;

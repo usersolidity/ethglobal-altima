@@ -17,6 +17,7 @@ const CardHolderFlip = styled.div`
 const CardsContainer = styled.div`
   flex: 0;
   width: 640px;
+  min-height: 158px;
   display: flex;
   flex-direction: row;
   align-items: center;
